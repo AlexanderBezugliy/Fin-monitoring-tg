@@ -1,7 +1,7 @@
-require("dotenv").config();
-const { Telegraf, Markup } = require("telegraf");
-const { GoogleSpreadsheet } = require("google-spreadsheet");
-const { JWT } = require("google-auth-library");
+import 'dotenv/config';
+import { Telegraf, Markup } from 'telegraf';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
+import { JWT } from 'google-auth-library';
 
 // Конфигурация из .env
 const BOT_TOKEN = process.env.BOT_TOKEN;
@@ -237,8 +237,8 @@ bot.on("text", async (ctx) => {
     }
 });
 
-// Экспорт обработчика для Vercel
-module.exports = async (req, res) => {
+// Экспорт обработчика для Vercel (ESM)
+export default async function handler(req, res) {
     try {
         if (req.method === 'POST') {
             await bot.handleUpdate(req.body);
